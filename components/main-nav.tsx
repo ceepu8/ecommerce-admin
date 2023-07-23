@@ -10,9 +10,9 @@ function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
 
   const routes = [
     {
-      href: `/${params.storedId}/settings`,
+      href: `/${params.storeId}/settings`,
       label: "Settings",
-      active: pathname === `/${params.storedId}/settings`,
+      active: pathname === `/${params.storeId}/settings`,
     },
   ];
 
