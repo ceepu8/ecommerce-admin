@@ -57,7 +57,7 @@ export async function PATCH(
       },
     });
 
-    if (storeByUserId) {
+    if (!storeByUserId) {
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
@@ -100,15 +100,16 @@ export async function DELETE(
       },
     });
 
-    if (storeByUserId) {
+    if (!storeByUserId) {
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
     const billboard = await prismadb.billboard.deleteMany({
       where: {
-        id: params.storeId,
+        id: params.billboardId,
       },
     });
+    console.log(123);
 
     return NextResponse.json(billboard);
   } catch (error) {

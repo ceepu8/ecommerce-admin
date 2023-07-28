@@ -35,7 +35,7 @@ export async function POST(
       },
     });
 
-    if (storeByUserId) {
+    if (!storeByUserId) {
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
