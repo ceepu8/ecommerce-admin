@@ -98,17 +98,30 @@ model Product {
   colorId String @db.ObjectId
   color   Color  @relation("ColorToProduct", fields: [colorId], references: [id])
 
+  images Image[] @relation("ProductToImage")
+
   name       String
   price      String
   isFeatured Boolean  @default(false)
   isArchived Boolean  @default(false)
-  images     Image[]  @relation("ProductToImage")
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+
+  @@index([storeId])
+  @@index([categoryId])
+  @@index([sizeId])
+  @@index([colorId])
 }
 
 model Image {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
   productId String  @db.ObjectId
   product   Product @relation("ProductToImage", fields: [productId], references: [id], onDelete: Cascade)
+
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
 }
