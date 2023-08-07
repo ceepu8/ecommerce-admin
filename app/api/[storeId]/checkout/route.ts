@@ -1,6 +1,7 @@
 import Stripe from "stripe";
-import { stripe } from "@/lib/stripe";
 import { NextResponse } from "next/server";
+
+import { stripe } from "@/lib/stripe";
 import prismadb from "@/lib/prismadb";
 
 const corsHeaders = {
@@ -41,7 +42,7 @@ export async function POST(
         product_data: {
           name: product.name,
         },
-        unit_amount: Number((parseFloat(product.price) * 100).toFixed(2)),
+        unit_amount: Number((Number(product.price) * 100).toFixed(2)),
       },
     });
   });
@@ -70,7 +71,7 @@ export async function POST(
       enabled: true,
     },
     success_url: `${process.env.FRONTEND_STORE_URL}/cart?success=1`,
-    cancel_url: `${process.env.FRONTEND_STORE_URL}/cart?cancel=1`,
+    cancel_url: `${process.env.FRONTEND_STORE_URL}/cart?canceled=1`,
     metadata: {
       orderId: order.id,
     },
