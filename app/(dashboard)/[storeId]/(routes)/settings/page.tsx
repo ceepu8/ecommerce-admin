@@ -9,7 +9,6 @@ interface SettingsPageProps {
   };
 }
 
-/* @ts-expect-error Server Component  */
 const SettingsPage: React.FC<SettingsPageProps> = async ({ params }) => {
   const { userId } = auth();
 
